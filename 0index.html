@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <title>料金シミュレーション</title>
+    <link rel="shortcut icon" href="https://i.pinimg.com/originals/96/e3/3a/96e33a87be2576e224e66bfea82b72dc.jpg">
+    <style>
+      * {
+        font-size: 6vmin; 
+        text-align: center;
+        margin-bottom: 4vmin;
+        font-family: "Helvetica Neue",
+        Arial,
+        "Hiragino Kaku Gothic ProN",
+        "Hiragino Sans",
+        Meiryo,
+        sans-serif;
+      }
+      input {
+        width: 20vmin; 
+      }
+      input[type=checkbox] {
+        transform: scale(6);
+      }
+      img {
+        max-width: 50vmin;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  
+  <body>
+    <header>
+      <img src='https://i.pinimg.com/originals/8b/37/ed/8b37eddb54cb672ed8261a6c4fa69163.jpg'>
+    </header>
+    
+    ・距離<input id='distance'>km
+    <br/>
+    ・待機料金<input id='waiting'>分
+    <br/>    
+    ・深夜料金<input type='checkbox' id='midnight'>    
+    <br/>    
+    <button onclick='run();'>計算</button>
+    <br/>
+    計算結果<div id='output'></div>
+    
+    <script>
+      let ans = 0;
+      
+      function run() {
+        if ( distance.value <= 5 ) {
+          ans = 3000;
+        } else if( distance.value >= 6 && distance.value <= 100 ) {
+          ans = 3000 + (distance.value-5) * 200;
+        } else if( distance.value >= 101 && distance.value <= 200 ) {
+          ans = 3000 + (distance.value-5) * 130;
+        } else if( distance.value >= 201 ) {
+          ans = 3000 + (distance.value-5) * 100;
+        } 
+        
+        if ( waiting.value >= 11 ) {
+          ans += (waiting.value-10) * 300;
+        }
+        
+        if ( midnight.checked === true ) {
+          ans *= 1.2;
+        }
+           
+        output.innerText = `料金は${ ans }円です`;
+      }
+      
+      
+      
+         
+         
+    </script>
+    
+    
+  </body>
+</html>
+
+
+
