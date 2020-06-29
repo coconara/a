@@ -72,7 +72,14 @@
         
         
         if ( waiting.value >= 11 ) {
-          ans += (waiting.value-10) * 30;
+          
+          for( let n = 0; n < waiting.value-10; n++ ) {
+            if ( (n % 11) === 0 ) {
+              ans += 300;
+              console.log( n % 10);
+            }
+          }
+          
         }
         
         if ( midnight.checked === true ) {
