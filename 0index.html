@@ -32,7 +32,7 @@
   
   <body>
     <header>
-      <img src='https://i.pinimg.com/originals/8b/37/ed/8b37eddb54cb672ed8261a6c4fa69163.jpg'>
+      <img onclick='url();' src='https://i.pinimg.com/originals/8b/37/ed/8b37eddb54cb672ed8261a6c4fa69163.jpg'>
     </header>
     
     ・距離<input id='distance'>km
@@ -45,10 +45,15 @@
     <br/>
     <button onclick='run();'>計算</button>
     <br/>
-    計算結果<div id='output'></div>
+    <div id='output'></div>
    
     
     <script>
+      
+      function url() {
+        location.href = 'https://pet-taxi.jp/';
+      }
+      
       let ans = 0;
       
       function run() {
