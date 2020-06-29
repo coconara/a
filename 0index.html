@@ -20,10 +20,10 @@
         width: 20vmin; 
       }
       input[type=checkbox] {
-        transform: scale(6);
+        transform: scale(4);
       }
       img {
-        max-width: 50vmin;
+        max-width: 30vmin;
         margin: 0;
         padding: 0;
       }
@@ -41,33 +41,45 @@
     <br/>    
     ・深夜料金<input type='checkbox' id='midnight'>    
     <br/>    
+    ・高速料金<input id='highway'>
+    <br/>
     <button onclick='run();'>計算</button>
     <br/>
     計算結果<div id='output'></div>
+   
     
     <script>
       let ans = 0;
       
       function run() {
-        if ( distance.value <= 5 ) {
+        
+        if( distance.value <= 5 ) {
+          
           ans = 3000;
-        } else if( distance.value >= 6 && distance.value <= 100 ) {
-          ans = 3000 + (distance.value-5) * 200;
-        } else if( distance.value >= 101 && distance.value <= 200 ) {
-          ans = 3000 + (distance.value-5) * 130;
-        } else if( distance.value >= 201 ) {
-          ans = 3000 + (distance.value-5) * 100;
-        } 
+          
+        } else if( 6 <= distance.value && distance.value <= 100 ) {
+          
+          ans = 3000 + 200 * (distance.value-5);
+          
+        } else if( 101 <= distance.value && distance.value <= 200 ) {
+          
+          ans = 3000 + 200 * (100-5) + 130 * (distance.value-100);
+          
+        } else if( 200 <= distance.value ) {
+          
+          ans = 3000 + 200 * (100-5) + 130 * (200-100) + 100 * (distance.value-200);
+        }
+        
         
         if ( waiting.value >= 11 ) {
-          ans += (waiting.value-10) * 300;
+          ans += (waiting.value-10) * 30;
         }
         
         if ( midnight.checked === true ) {
           ans *= 1.2;
         }
            
-        output.innerText = `料金は${ ans }円です`;
+        output.innerText = `料金は${ ans + (+highway.value)}円です`;
       }
       
       
