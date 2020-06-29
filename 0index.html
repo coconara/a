@@ -16,32 +16,70 @@
         Meiryo,
         sans-serif;
       }
+      
       input {
         width: 20vmin; 
+        text-align: left;
+        outline: none;
+        caret-color: blue;
       }
+      
+      input:hover {
+        border: 2px solid green;
+      }
+      
       input[type=checkbox] {
         transform: scale(4);
       }
-      img {
+      input[type=checkbox]:hover {
+        transform: scale(4);
+        border: 2px solid orange; 
+      }
+      
+      #tokyo {
         max-width: 30vmin;
         margin: 0;
         padding: 0;
+      }
+      
+      #dog {
+        position: absolute;
+        top: 1px;
+        left: 6vmin;
+        background: #000;
+        width: 10vmin;
+        height: 10vmin;
+        margin: 100px;
+        animation: fluffy1 3s ease infinite;
+      }
+
+      @keyframes fluffy1 {
+        0% { transform:translateY(0) }
+        5% { transform:translateY(0) }
+        10% { transform:translateY(0) }
+        20% { transform:translateY(-15px) }
+        25% { transform:translateY(0) }
+        30% { transform:translateY(-15px) }
+        50% { transform:translateY(0) }
+        100% { transform:translateY(0) }
       }
     </style>
   </head>
   
   <body>
     <header>
-      <img onclick='url();' src='https://i.pinimg.com/originals/8b/37/ed/8b37eddb54cb672ed8261a6c4fa69163.jpg'>
+      <img id='tokyo' onclick='url();' src='https://i.pinimg.com/originals/8b/37/ed/8b37eddb54cb672ed8261a6c4fa69163.jpg'>
+            
+      <img id='dog' src='https://media.discordapp.net/attachments/670217659287076886/727138601904635914/2020.6.23_200628_0013.jpg?width=434&height=472'>
     </header>
     
-    ・距離<input id='distance'>km
+    ・距離 <input type='tel' id='distance'>km
     <br/>
-    ・待機料金<input id='waiting'>分
+    ・待機料金 <input type='tel' id='waiting'>分
     <br/>    
-    ・深夜料金<input type='checkbox' id='midnight'>    
+    ・深夜料金 <input type='checkbox' id='midnight'>    
     <br/>    
-    ・高速料金<input id='highway'>
+    ・高速料金 <input type='tel' id='highway'>
     <br/>
     <button onclick='run();'>計算</button>
     <br/>
