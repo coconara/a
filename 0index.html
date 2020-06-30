@@ -1,99 +1,129 @@
 <!doctype html>
-<html>
+<html lang="ja">
   <head>
-    <meta charset='utf-8'>
+    <!-- Required meta tags -->    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
     <title>料金シミュレーション</title>
     <link rel="shortcut icon" href="https://i.pinimg.com/originals/96/e3/3a/96e33a87be2576e224e66bfea82b72dc.jpg">
+    
     <style>
       * {
-        font-size: 6vmin; 
         text-align: center;
-        margin-bottom: 4vmin;
-        font-family: "Helvetica Neue",
-        Arial,
-        "Hiragino Kaku Gothic ProN",
-        "Hiragino Sans",
-        Meiryo,
-        sans-serif;
+      }
+      
+      #headerIcon {
+        width: 300px;
+        height: auto;
+      }
+      
+      form {
+        font-size: 30px;
       }
       
       input {
-        width: 20vmin; 
-        text-align: left;
-        outline: none;
-        caret-color: blue;
-        
+        width: 100px;
+        font-size: 30px;
       }
-      
-      input:hover {
-        border: 2px solid green;
-      }
-      
       input[type=checkbox] {
-        transform: scale(4);
-        vertical-align: 1.6vmin;
-        text-align: center;
+        transform: scale(3);
+        vertical-align: middle;
       }
-      input[type=checkbox]:hover {
-        transform: scale(4);
-        border: 2px solid orange; 
-      }
-      
-      #tokyo {
-        max-width: 30vmin;
-        margin: 0;
-        padding: 0;
+      button {
+        font-size: 40px;
+        padding-left: 10px;
+        padding-right: 10px;
       }
       
-      #dog {
+      
+      #whiteTrack {
+        width: 100px;
+        height: auto;
         position: absolute;
-        top: 4vmin;
-        left: 10vmin;
-        background: #000;
-        width: 14vmin;
-        height: 14vmin;
-        animation: fluffy1 3s ease infinite;
+        margin: 0 auto;
+        right: 0;
+        bottom: 0;
+        
+        display: inline-block;
+        animation: buruburu .1s  infinite;
+        animation: moveDog 10s infinite;
+      }
+      
+      #BlackDogIcon {
+        width: 30px;
+        height: auto;
+        position: absolute;
+        margin: 0 auto;
+        right: 14px;
+        bottom: 50px;
+        
+        display: inline-block;
+        animation: buruburu .3s  infinite;
+        animation: moveDog 10s infinite;
+      }
+      
+      #underground {
+        position: absolute;
+        bottom: 0px;
+        width: 100%;
+        height: 25px;
+        background-color: dimgray;
       }
 
-      @keyframes fluffy1 {
-        0% { transform:translateY(0) }
-        5% { transform:translateY(0) }
-        10% { transform:translateY(0) }
-        20% { transform:translateY(-15px) }
-        25% { transform:translateY(0) }
-        30% { transform:translateY(-15px) }
-        50% { transform:translateY(0) }
-        100% { transform:translateY(0) }
+      
+      @keyframes buruburu {     
+        
+          0% {transform: translate(0px, 0px) rotateZ(0deg)}
+          25% {transform: translate(1px, 1px) rotateZ(1deg)}
+          50% {transform: translate(0px, 1px) rotateZ(0deg)}
+          75% {transform: translate(1px, 0px) rotateZ(-1deg)}
+          100% {transform: translate(0px, 0px) rotateZ(0deg)}
       }
+      
+      @keyframes moveDog {     
+        
+          0% {
+            transform: translateX(0vw);
+          }
+          to {
+            transform: translateX(-100vw);
+          }
+      }
+      
     </style>
-  </head>
-  
-  <body>
-    <header>
-      <img id='tokyo' onclick='url();' src='https://i.pinimg.com/originals/8b/37/ed/8b37eddb54cb672ed8261a6c4fa69163.jpg'>
-            
-      <img id='dog' src='https://media.discordapp.net/attachments/670217659287076886/727138601904635914/2020.6.23_200628_0013.jpg?width=434&height=472'>
-    </header>
     
-    ・距離 <input type='tel' id='distance'>km
-    <br/>
-    ・待機料金 <input type='tel' id='waiting'>分
-    <br/>    
-    ・深夜料金 <input type='checkbox' id='midnight'>    
-    <br/>    
-    ・高速料金 <input type='tel' id='highway'>
-    <br/>
-    <button onclick='run();'>計算</button>
-    <br/>
-    <div id='output'></div>
+  </head>
+  <body>
+    
+    <header>
+      <img id='headerIcon' onclick='url();' src='https://i.pinimg.com/originals/8b/37/ed/8b37eddb54cb672ed8261a6c4fa69163.jpg'>     </header>
+    
+    <main>
+      <form>
+        <p>・距離 <input type='tel' id='distance'>km</p>
+        <p>・待機料金 <input type='tel' id='waiting'>分</p>
+        <p>・深夜料金 <input type='checkbox' id='midnight'></p>        
+        <p>・高速料金 <input type='tel' id='highway'></p>
+        <p><button type='button' onclick='run();'>計算</button></p>
+        <div id='output'></div>
+      </form>
+    </main>
    
+    <footer>
+      <img id='whiteTrack' src='https://i.pinimg.com/originals/57/27/27/5727272fa7ee7e131db7268f595561f5.png'>
+      
+      <img id='BlackDogIcon' src='https://i.pinimg.com/originals/40/2d/b8/402db8a909f338f497d5cfac5b6d1967.jpg'>
+      
+      <div id='underground'></div>
+    </footer>
     
     <script>
       
       function url() {
         location.href = 'https://pet-taxi.jp/';
       }
-      
+           
       let ans = 0;
       
       function run() {
@@ -132,17 +162,12 @@
         }
            
         output.innerText = `料金は${ ans + (+highway.value)}円です`;
-      }
-      
-      
-      
-         
+      }     
          
     </script>
-    
-    
   </body>
 </html>
+
 
 
 
