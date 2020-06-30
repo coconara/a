@@ -7,33 +7,64 @@
     
     <title>料金シミュレーション</title>
     <link rel="shortcut icon" href="https://i.pinimg.com/originals/96/e3/3a/96e33a87be2576e224e66bfea82b72dc.jpg">
-    
+        
     <style>
-      * {
-        text-align: center;
+      body {
+        font-family: "Helvetica Neue",
+        Arial,
+        "Hiragino Kaku Gothic ProN",
+        "Hiragino Sans",
+        Meiryo,
+        sans-serif;
+        
+        overflow: hidden;
+      }
+      
+      .container::-webkit-scrollbar {
+          display:none;
       }
       
       #headerIcon {
         width: 300px;
         height: auto;
+        margin: 0 auto; 
+        margin-bottom: 30px;
       }
       
-      form {
-        font-size: 30px;
+      img {
+        max-width: 100%;
       }
+      
+      main {
+        text-align: center;
+      }
+      form {
+        font-size: 32px;
+        text-align: left;
+        display: inline-block;
+        line-height: 2.2;
+      }
+     
       
       input {
         width: 100px;
         font-size: 30px;
+        text-align: left;
       }
       input[type=checkbox] {
         transform: scale(3);
         vertical-align: middle;
       }
       button {
-        font-size: 40px;
+        font-size: 36px;
         padding-left: 10px;
         padding-right: 10px;
+        margin: 0 auto;
+        margin: 10px;
+      }
+      
+      #output {
+        font-size: 30px;
       }
       
       
@@ -97,17 +128,25 @@
   <body>
     
     <header>
-      <img id='headerIcon' onclick='url();' src='https://i.pinimg.com/originals/8b/37/ed/8b37eddb54cb672ed8261a6c4fa69163.jpg'>     </header>
+      <div id='headerIcon' onclick='url();'>
+        <img src='https://i.pinimg.com/originals/8b/37/ed/8b37eddb54cb672ed8261a6c4fa69163.jpg'>
+      </div>
+    </header>
     
     <main>
       <form>
-        <p>・距離 <input type='tel' id='distance'>km</p>
-        <p>・待機料金 <input type='tel' id='waiting'>分</p>
-        <p>・深夜料金 <input type='checkbox' id='midnight'></p>        
-        <p>・高速料金 <input type='tel' id='highway'></p>
-        <p><button type='button' onclick='run();'>計算</button></p>
-        <div id='output'></div>
+        ・距離 <input type='tel' id='distance'>km
+        <br/>
+        ・待機料金 <input type='tel' id='waiting'>分
+        <br/>
+        ・深夜料金 <input type='checkbox' id='midnight'>
+        <br/>       
+        ・高速料金 <input type='tel' id='highway'>        
       </form>
+      <br/>
+      <button type='button' onclick='run();'>計算</button>
+      <br/>
+      <div id='output'></div>
     </main>
    
     <footer>
@@ -119,6 +158,8 @@
     </footer>
     
     <script>
+      //右クリック禁止
+      document.oncontextmenu = function () {return false;}
       
       function url() {
         location.href = 'https://pet-taxi.jp/';
