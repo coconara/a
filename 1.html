@@ -9,6 +9,10 @@
     <link rel="shortcut icon" href="https://i.pinimg.com/originals/96/e3/3a/96e33a87be2576e224e66bfea82b72dc.jpg">
         
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
       body {
         font-family: "Helvetica Neue",
         Arial,
@@ -31,6 +35,14 @@
         margin-bottom: 30px;
       }
       
+      #midnight {
+        font-size: 30px;
+        width: 30px;
+        height: 30px;
+        border: solid 3px black;
+        margin-left: 30px;
+      }
+      
       img {
         max-width: 100%;
       }
@@ -51,11 +63,7 @@
         font-size: 30px;
         text-align: left;
       }
-      input[type=checkbox] {
-        transform: scale(3);
-        vertical-align: middle;
-      }
-      button {
+      #math {
         font-size: 36px;
         padding-left: 10px;
         padding-right: 10px;
@@ -139,12 +147,12 @@
         <br/>
         ・待機料金 <input type='tel' id='waiting'>分
         <br/>
-        ・深夜料金 <input type='checkbox' id='midnight'>
+        ・深夜料金 <button type='button' id='midnight' onclick='night();'></button>
         <br/>       
         ・高速料金 <input type='tel' id='highway'>        
       </form>
       <br/>
-      <button type='button' onclick='run();'>計算</button>
+      <button id='math' type='button' onclick='run();'>計算</button>
       <br/>
       <div id='output'></div>
     </main>
@@ -163,6 +171,16 @@
       
       function url() {
         location.href = 'https://pet-taxi.jp/';
+      }
+      
+      let onOff = 1;
+      function night() {
+        onOff++;
+        if ( onOff % 2 === 0 ) {
+          midnight.style.backgroundColor = '#2f2f2f';
+        } else {
+          midnight.style.backgroundColor = 'white';
+        }
       }
            
       let ans = 0;
@@ -198,9 +216,9 @@
           
         }
         
-        if ( midnight.checked === true ) {
+        if ( onOff % 2 === 0 ) {
           ans *= 1.2;
-        }
+        }          
            
         output.innerText = `料金は${ ans + (+highway.value)}円です`;
       }     
